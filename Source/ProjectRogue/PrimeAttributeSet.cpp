@@ -9,6 +9,20 @@ UPrimeAttributeSet::UPrimeAttributeSet(): CurrentHealth(100.f), MaxHealth(100.f)
 
 }
 
+void UPrimeAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+
+	// Clamp CurrentHealth to MaxHealth
+	if (Attribute == GetCurrentHealthAttribute())
+	{
+		// Ensure CurrentHealth does not exceed MaxHealth
+		const float MaxHealthValue = MaxHealth.GetCurrentValue();
+		NewValue = FMath::Clamp(NewValue, 0.0f, MaxHealthValue);
+
+	}
+}
+
 
 /*
 *  For Online stuff if we ever do that as an example
