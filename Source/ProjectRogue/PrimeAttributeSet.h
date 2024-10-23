@@ -45,11 +45,15 @@ public:
 	FGameplayAttributeData Defense;
 	ATTRIBUTE_ACCESSORS(UPrimeAttributeSet, Defense)
 
+protected:
+
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
 
 /*
 *  For Online stuff if we ever do that as an example
 * 
-	protected:
+	
 	UFUNCTION()
 	virtual void OnRep_CurrentHealth(const FGameplayAttributeData& OldCurrentHealth);
 */
