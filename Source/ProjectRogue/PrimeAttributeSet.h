@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "PrimeAttributeSet.generated.h"
+
 
 //macros to declare attributes
 # define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
@@ -26,22 +28,22 @@ public:
 	UPrimeAttributeSet();
 
 	//current Health
-	UPROPERTY(BlueprintReadOnly, Category = "Health")//, ReplicatedUsing = OnRep_CurrentHealth)
+	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_CurrentHealth)
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UPrimeAttributeSet, CurrentHealth)
 
 	//Max Health
-	UPROPERTY(BlueprintReadOnly, Category = "Health")//, ReplicatedUsing = OnRep_MaxHealth)
+	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UPrimeAttributeSet, MaxHealth)
 
 	//Attack
-	UPROPERTY(BlueprintReadOnly, Category = "Attack")//, ReplicatedUsing = OnRep_Attack)
+	UPROPERTY(BlueprintReadOnly, Category = "Attack", ReplicatedUsing = OnRep_Attack)
 	FGameplayAttributeData Attack;
 	ATTRIBUTE_ACCESSORS(UPrimeAttributeSet, Attack)
 
 	//Defense
-	UPROPERTY(BlueprintReadOnly, Category = "Defense")//, ReplicatedUsing = OnRep_Defense)
+	UPROPERTY(BlueprintReadOnly, Category = "Defense", ReplicatedUsing = OnRep_Defense)
 	FGameplayAttributeData Defense;
 	ATTRIBUTE_ACCESSORS(UPrimeAttributeSet, Defense)
 
@@ -49,13 +51,19 @@ protected:
 
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-/*
-*  For Online stuff if we ever do that as an example
-* 
-	
+
 	UFUNCTION()
 	virtual void OnRep_CurrentHealth(const FGameplayAttributeData& OldCurrentHealth);
-*/
+
+	UFUNCTION()
+	virtual void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth);
+
+	UFUNCTION()
+	virtual void OnRep_Attack(const FGameplayAttributeData& OldAttack);
+
+	UFUNCTION()
+	virtual void OnRep_Defense(const FGameplayAttributeData& OldDefense);
 
 };
