@@ -3,7 +3,7 @@
 
 #include "PrimeAttributeSet.h"
 
-UPrimeAttributeSet::UPrimeAttributeSet(): CurrentHealth(100.f), MaxHealth(100.f), Attack(10.f), Defense(5.f)
+UPrimeAttributeSet::UPrimeAttributeSet(): CurrentHealth(500.f), MaxHealth(500.f), Attack(10.f), Defense(5.f)
 {
 
 }
